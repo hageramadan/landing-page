@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900 overflow-x-hidden;
+  }
+  
+  section {
+    @apply py-20 px-4 md:px-8;
+  }
+
+  /* RTL Support */
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+  
+  html[dir="ltr"] {
+    direction: ltr;
+  }
+}
+
+@layer utilities {
+  .font-cairo {
+    font-family: var(--font-cairo);
+  }
+}
+
+/* Mobile menu animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Ensure dropdowns appear above everything */
+.dropdown-menu {
+  z-index: 9999 !important;
+}
+
+/* Fix for mobile menu visibility */
+@media (max-width: 768px) {
+  .mobile-menu-open {
+    overflow: hidden;
+  }
+  
+  /* Ensure navbar has proper stacking context */
+  nav {
+    z-index: 1000;
+  }
+}
+
+/* Mobile menu animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Improve mobile menu scrolling */
+@media (max-width: 1023px) {
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Smooth transitions */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* Hero Section Responsive */
+@media (max-width: 1024px) {
+  section#about {
+    height: auto !important;
+    min-height: 730px;
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  section#about {
+    min-height: auto;
+    padding: 60px 0;
+  }
+  
+  .hero-title {
+    font-size: 28px !important;
+  }
+  
+  .hero-description {
+    font-size: 14px !important;
+  }
+}
+/* Hero Section with Blur - Mobile Optimization */
+@media (max-width: 768px) {
+  .hero-blur {
+    backdrop-filter: blur(40px) !important;
+    -webkit-backdrop-filter: blur(40px) !important;
+  }
+  
+  .hero-text-shadow {
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+  }
+}
+
+/* Improve text readability on mobile */
+@media (max-width: 768px) {
+  section#about .text-white {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  section#about .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Adjust blur for better performance */
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+}
