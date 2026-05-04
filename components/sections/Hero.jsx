@@ -3,10 +3,12 @@
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaPlay, FaChartLine } from 'react-icons/fa';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCountry } from '@/contexts/CountryContext';
 import Image from 'next/image';
 
 const Hero = () => {
   const { language } = useLanguage();
+  const { whatsappNumber } = useCountry(); // استخدام رقم الواتساب من السياق
 
   // Translations
   const translations = {
@@ -32,7 +34,17 @@ const Hero = () => {
     }
   };
 
-  const t = translations[language ];
+  const t = translations[language];
+
+  const handleWhatsAppClick = () => {
+    const cleanNumber = whatsappNumber.replace(/[^\d+]/g, "");
+    const message = language === 'ar' 
+      ? "السلام عليكم، أود الحصول على استشارة مجانية لمشروعي الرقمي"
+      : "Hello, I would like to get a free consultation for my digital project";
+    
+    const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
   return (
     <section 
@@ -84,8 +96,7 @@ const Hero = () => {
                 backdropFilter: 'blur(10px)',
               }}
             >
-           
-              
+             
               {/* Main Title - White Text */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
@@ -94,7 +105,6 @@ const Hero = () => {
                 className="text-4xl lg:text-[46px] font-bold mb-6 leading-tight text-white"
               >
                 {t.title}
-              
               </motion.h1>
               
               {/* Description - White Text */}
@@ -115,6 +125,7 @@ const Hero = () => {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <button 
+                  onClick={handleWhatsAppClick}
                   className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold transition-all hover:scale-105"
                   style={{
                     background: 'linear-gradient(90deg, #4584C5 0%, #21405F 100%)',
@@ -126,10 +137,13 @@ const Hero = () => {
                   <FaArrowRight className={`inline ${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'}`} />
                 </button>
                 
-             
+                {/* يمكنك إضافة زر "شاهد أعمالنا" هنا إذا أردت */}
+                {/* <button className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold transition-all hover:scale-105 border border-white/30 hover:bg-white/10">
+                  {t.demo}
+                  <FaPlay className="inline ml-2" />
+                </button> */}
+                
               </motion.div>
-
-             
             </div>
           </motion.div>
 

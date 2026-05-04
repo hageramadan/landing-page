@@ -5,71 +5,11 @@ import LanguageDropdown from '@/components/LanguageDropdown';
 import { MdOutlineEmail } from "react-icons/md";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useCountry } from '@/contexts/CountryContext';
 
 const SubNavbar = () => {
   const { language } = useLanguage();
-  const [whatsappNumber, setWhatsappNumber] = useState<string>("201024848723"); // Default Egypt
-  const [countryDetected, setCountryDetected] = useState<boolean>(false);
-
-  useEffect(() => {
-    const detectCountry = async () => {
-      try {
-        // Method 1: Using IP API (most accurate)
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-      
-        if (data.country_code === 'EG') {
-          setWhatsappNumber("201024848723");
-          console.log('Egypt detected - WhatsApp: 201024848723');
-        } else if (data.country_code === 'SA') {
-          setWhatsappNumber("966549256726");
-          console.log('Saudi Arabia detected - WhatsApp: 966549256726');
-        } else {
-          // Default to Saudi if country not detected
-          setWhatsappNumber("966549256726");
-          console.log('Default - WhatsApp: 966549256726');
-        }
-        setCountryDetected(true);
-      } catch (error) {
-        // Method 2: Fallback to timezone detection
-        console.log('IP detection failed, using timezone fallback');
-        try {
-          const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-          const browserLang = navigator.language;
-          
-          // Check for Egypt
-          if (timezone?.includes('Cairo') || 
-              timezone?.includes('Egypt') || 
-              browserLang?.includes('eg') ||
-              browserLang?.includes('EG')) {
-            setWhatsappNumber("201024848723");
-            console.log('Egypt detected (timezone) - WhatsApp: 201024848723');
-          } 
-          // Check for Saudi Arabia
-          else if (timezone?.includes('Riyadh') || 
-                   timezone?.includes('Saudi') || 
-                   browserLang?.includes('sa') ||
-                   browserLang?.includes('SA')) {
-            setWhatsappNumber("966549256726");
-            console.log('Saudi detected (timezone) - WhatsApp: 966549256726');
-          }
-          // Default to Saudi
-          else {
-            setWhatsappNumber("966549256726");
-            console.log('Default - WhatsApp: 966549256726');
-          }
-        } catch (fallbackError) {
-          // Ultimate fallback - Saudi number
-          setWhatsappNumber("966549256726");
-          console.log('Fallback - WhatsApp: 966549256726');
-        }
-        setCountryDetected(true);
-      }
-    };
-
-    detectCountry();
-  }, []);
+  const { whatsappNumber } = useCountry(); // استخدام الرقم من الـ Context
 
   return (
     <div

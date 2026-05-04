@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaArrowRight } from 'react-icons/fa';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCountry } from '@/contexts/CountryContext';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +13,19 @@ const Navbar = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [activeLink, setActiveLink] = useState('about');
   const { language } = useLanguage();
+  const { whatsappNumber } = useCountry();
+
+  // دالة فتح الواتساب
+  const handleWhatsAppClick = () => {
+    const cleanNumber = whatsappNumber?.replace(/[^\d+]/g, "") || "";
+    const message =
+      language === "ar"
+        ? "السلام عليكم، أود الحصول على استشارة تقنية مجانية لمشروعي"
+        : "Hello, I would like to get a free technical consultation for my project";
+
+    const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,16 +136,37 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Start Project Button - Left side */}
+            {/* Start Project Button - Left side with animation */}
             <div className="order-3 hidden lg:flex items-center gap-4">
-              <button 
-                className="text-white px-4 py-1.5 md:px-5 md:py-2 rounded-lg transition text-sm xl:text-base whitespace-nowrap"
+              <motion.button 
+                onClick={handleWhatsAppClick}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0px 6px 20px rgba(69, 132, 197, 0.3)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 17
+                }}
+                className="text-white px-4 py-1.5 md:px-5 md:py-2 rounded-lg transition text-sm xl:text-base whitespace-nowrap flex items-center gap-2 group"
                 style={{
                   background: 'linear-gradient(90deg, #4584C5 0%, #21405F 100%)',
                 }}
               >
-                {language === 'ar' ? 'ابدأ مشروعك الآن' : 'Start Your Project Now'}
-              </button>
+                <span>{language === 'ar' ? 'ابدأ مشروعك الآن' : 'Start Your Project Now'}</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ 
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <FaArrowRight className={`text-sm ${language === 'ar' ? 'rotate-180' : ''}`} />
+                </motion.span>
+              </motion.button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -154,7 +190,13 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           />
           
-          <div className="fixed top-[72px] left-4 right-4 bg-white shadow-2xl z-40 lg:hidden rounded-2xl overflow-hidden animate-slideDown">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-[72px] left-4 right-4 bg-white shadow-2xl z-40 lg:hidden rounded-2xl overflow-hidden"
+          >
             {/* Header with logo in mobile menu */}
             <div className="p-3 border-b border-gray-100 bg-gray-50">
               <div className="w-[60px] h-[40px] mx-auto relative">
@@ -189,11 +231,26 @@ const Navbar = () => {
             
             {/* Button Section */}
             <div className="p-4 pt-2 border-t border-gray-100 bg-gray-50">
-              <button className="w-full bg-[#4584C5] text-white px-4 py-2.5 rounded-xl hover:bg-[#21405F] transition text-sm font-medium">
-                {language === 'ar' ? 'ابدأ مشروعك الآن' : 'Start Your Project Now'}
-              </button>
+              <motion.button 
+                onClick={handleWhatsAppClick}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-gradient-to-r from-[#4584C5] to-[#21405F] text-white px-4 py-2.5 rounded-xl hover:shadow-lg transition-all duration-300 text-sm font-medium flex items-center justify-center gap-2 group"
+              >
+                <span>{language === 'ar' ? 'ابدأ مشروعك الآن' : 'Start Your Project Now'}</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ 
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <FaArrowRight className={`text-sm ${language === 'ar' ? 'rotate-180' : ''}`} />
+                </motion.span>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         </>
       )}
     </>

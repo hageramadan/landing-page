@@ -7,7 +7,7 @@ import SubNavbar from "@/components/layout/SubNavbar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
-
+import { CountryProvider } from '@/contexts/CountryContext';
 const cairo = Cairo({
   subsets: ["latin", "arabic"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -64,16 +64,18 @@ export default function RootLayout({
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+         <CountryProvider>
+            <LanguageProvider>
+                <div className="min-h-screen flex flex-col">
+                  <SubNavbar />
+                  <Navbar />
+                  <main className="flex-1">{children}</main>
+                  {/* <Footer /> */}
+                  <FloatingWhatsApp />
+                </div>
+              </LanguageProvider>
+         </CountryProvider>
         
-        <LanguageProvider>
-          <div className="min-h-screen flex flex-col">
-            <SubNavbar />
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            {/* <Footer /> */}
-             <FloatingWhatsApp />
-          </div>
-        </LanguageProvider>
       </body>
     </html>
   );
