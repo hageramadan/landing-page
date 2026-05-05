@@ -6,6 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useCountry } from '@/contexts/CountryContext';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,12 +68,12 @@ const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { key: 'about', href: '#about', nameAr: 'عن تواجد', nameEn: 'About' },
-    { key: 'services', href: '#services', nameAr: 'الخدمات', nameEn: 'Services' },
-    { key: 'projects', href: '#projects', nameAr: 'المشاريع', nameEn: 'Projects' },
-    { key: 'partners', href: '#partners', nameAr: 'الشركاء', nameEn: 'Partners' },
-    { key: 'faq', href: '#faq', nameAr: 'الاسئلة', nameEn: 'FAQ' },
-    { key: 'contact', href: '#contact', nameAr: 'تواصل معنا', nameEn: 'Contact Us' },
+    { key: 'about', href: '/', nameAr: 'عن تواجد', nameEn: 'About' },
+    { key: 'services', href: '/#services', nameAr: 'الخدمات', nameEn: 'Services' },
+    { key: 'projects', href: '/#projects', nameAr: 'المشاريع', nameEn: 'Projects' },
+    { key: 'partners', href: '/#partners', nameAr: 'الشركاء', nameEn: 'Partners' },
+    { key: 'faq', href: '/#faq', nameAr: 'الاسئلة', nameEn: 'FAQ' },
+    { key: 'contact', href: '/#contact', nameAr: 'تواصل معنا', nameEn: 'Contact Us' },
   ];
 
   const handleLinkClick = (linkKey: string) => {
@@ -101,18 +102,22 @@ const Navbar = () => {
                 )}
                 
                 {/* Image with optimization */}
-                <Image 
+                <Link href="/" aria-label='home'>
+                  <Image 
                   src="/images/logo/logo.png" 
                   alt="Tawajood Logo" 
                   width={200} 
                   height={120}
                   quality={90}
+                  loading="eager"
                   priority={true}
                   className={`w-full h-full object-contain transition-opacity duration-300 ${
                     imageLoaded ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoad={() => setImageLoaded(true)}
                 />
+                </Link>
+              
               </div>
             </div>
 
@@ -120,7 +125,8 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center justify-center flex-1 mx-4 order-2">
               <div className="flex items-center gap-4 xl:gap-8">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
+                  aria-label={link.nameEn}
                     key={link.key}
                     href={link.href}
                     onClick={() => handleLinkClick(link.key)}
@@ -131,7 +137,7 @@ const Navbar = () => {
                     }`}
                   >
                     {language === 'ar' ? link.nameAr : link.nameEn}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

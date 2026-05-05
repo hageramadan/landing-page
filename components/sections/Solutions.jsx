@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
@@ -14,12 +14,24 @@ const SolutionsSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [cardsPerView, setCardsPerView] = useState(1);
   const [isMounted, setIsMounted] = useState(false);
-
-  const cardWidth = 280;
-  const gap = 24;
-  const cardTotalWidth = cardWidth + gap;
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const sliderRef = useRef(null);
 
   const isRTL = language === "ar";
+
+  // Responsive card dimensions
+  const getCardWidth = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? 220 : 280;
+    }
+    return 280;
+  };
+  
+  const [cardWidth, setCardWidth] = useState(280);
+  const gap = 24;
+  const cardTotalWidth = cardWidth + gap;
 
   // جلب الكروت من ملف الترجمة
   const cards = t("solutions.cards", { 
@@ -82,13 +94,63 @@ const SolutionsSection = () => {
     window.open(whatsappUrl, "_blank");
   };
 
+  // Swipe handlers - Fixed direction
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    // Fixed swipe direction based on RTL/LTR
+    if (isRTL) {
+      // In RTL mode (Arabic)
+      if (isLeftSwipe) {
+        handlePrev(); // Swipe left goes to previous
+      }
+      if (isRightSwipe) {
+        handleNext(); // Swipe right goes to next
+      }
+    } else {
+      // In LTR mode (English)
+      if (isLeftSwipe) {
+        handleNext(); // Swipe left goes to next
+      }
+      if (isRightSwipe) {
+        handlePrev(); // Swipe right goes to previous
+      }
+    }
+    
+    // Reset values
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
   // تحديث عدد الكروت الظاهرة حسب حجم الشاشة
   useEffect(() => {
     setIsMounted(true);
 
     const updateCardsPerView = () => {
+      const isMobileDevice = window.innerWidth < 768;
+      setIsMobile(isMobileDevice);
+      
       const newCardsPerView = window.innerWidth >= 1024 ? 4 : 1;
       setCardsPerView(newCardsPerView);
+      
+      // Update card width on mobile
+      if (isMobileDevice) {
+        setCardWidth(220);
+      } else {
+        setCardWidth(280);
+      }
     };
 
     updateCardsPerView();
@@ -131,29 +193,29 @@ const SolutionsSection = () => {
   }
 
   return (
-    <section className="bg-white py-6 overflow-hidden">
+    <section id="services" className="bg-white pt-32 overflow-hidden">
       <div className="container mx-auto px-4" dir={isRTL ? "rtl" : "ltr"}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center max-w-2xl mx-auto mb-12 md:mb-16"
+          className="text-center max-w-2xl mx-auto mb-8 md:mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4">
             {t("solutions.title") || "حلول تقنية متكاملة، مصممة لنمو أعمالك"}
           </h2>
-          <p className="text-[#585858] text-base md:text-lg">
+          <p className="text-[#585858] text-sm md:text-lg px-2">
             {t("solutions.description") || "من الفكرة إلى الإطلاق، نقدم لك باقة شاملة من الخدمات البرمجية والتسويقية التي تضمن استقرار مشروعك وانتشارك في السوق الرقمي."}
           </p>
         </motion.div>
 
         <div className="relative">
-          {/* السهم الأيمن (التالي) */}
+          {/* السهم الأيمن (التالي) - Hidden on mobile, visible on desktop */}
           {maxIndex > 0 && (
             <button
               onClick={handleNext}
-              className={`absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-3 hover:bg-gray-50 transition-all duration-300 border border-gray-200 ${
+              className={`hidden md:flex absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-3 hover:bg-gray-50 transition-all duration-300 border border-gray-200 ${
                 currentIndex >= maxIndex && "opacity-50 cursor-not-allowed"
               }`}
               aria-label={t("solutions.next") || "التالي"}
@@ -163,11 +225,11 @@ const SolutionsSection = () => {
             </button>
           )}
 
-          {/* السهم الأيسر (السابق) */}
+          {/* السهم الأيسر (السابق) - Hidden on mobile, visible on desktop */}
           {maxIndex > 0 && (
             <button
               onClick={handlePrev}
-              className={`absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-3 hover:bg-gray-50 transition-all duration-300 border border-gray-200 ${
+              className={`hidden md:flex absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-3 hover:bg-gray-50 transition-all duration-300 border border-gray-200 ${
                 currentIndex === 0 && "opacity-50 cursor-not-allowed"
               }`}
               aria-label={t("solutions.prev") || "السابق"}
@@ -178,9 +240,15 @@ const SolutionsSection = () => {
           )}
 
           {/* الحاوية الرئيسية للكروت */}
-          <div className="overflow-hidden">
+          <div 
+            className="overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            ref={sliderRef}
+          >
             <motion.div
-              className="flex gap-6 pb-6 px-8"
+              className="flex gap-8 md:gap-6 pb-6 px-4 md:px-8"
               animate={{
                 x: getTranslateX(),
               }}
@@ -200,45 +268,45 @@ const SolutionsSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex-shrink-0 pt-10"
+                  className="flex-shrink-0 pt-8 md:pt-10"
                   style={{ width: `${cardWidth}px` }}
                   onMouseEnter={() => setHoveredCard(card.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div
-                    className="bg-white rounded-2xl border border-gray-200 hover:shadow-2xl transition-all duration-300 flex flex-col relative"
-                    style={{ height: "340px" }}
+                    className="bg-white rounded-xl md:rounded-2xl border border-gray-200 hover:shadow-2xl transition-all duration-300 flex flex-col relative"
+                    style={{ height: isMobile ? "290px" : "340px" }}
                   >
-                    <div className="absolute -top-[37px] left-1/2 transform -translate-x-1/2 z-10">
-                      <div style={{ width: "74px", height: "74px" }}>
+                    <div className="absolute -top-[30px] md:-top-[37px] left-1/2 transform -translate-x-1/2 z-10">
+                      <div style={{ width: isMobile ? "60px" : "74px", height: isMobile ? "60px" : "74px" }}>
                         <div className="w-full h-full flex items-center justify-center">
                           <Image
                             src={card.image}
                             alt={card.title}
-                            width={74}
-                            height={74}
+                            width={isMobile ? 60 : 74}
+                            height={isMobile ? 60 : 74}
                             className="object-cover w-full h-full"
                           />
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-5 text-center flex-1 flex flex-col mt-9">
-                      <h3 className="text-base md:text-[20px] font-bold mb-3 text-gray-800 line-clamp-2 min-h-[56px]">
+                    <div className="p-3 md:p-5 text-center flex-1 flex flex-col mt-7 md:mt-9">
+                      <h3 className="text-sm md:text-[20px] font-bold mb-2 md:mb-3 text-gray-800 line-clamp-2 min-h-[40px] md:min-h-[56px]">
                         {card.title}
                       </h3>
-                      <p className="text-[#585858] text-xs md:text-[16px] leading-relaxed mb-5 line-clamp-4 min-h-[96px]">
+                      <p className="text-[#585858] text-[10px] md:text-[16px] leading-relaxed mb-3 md:mb-5 line-clamp-3 md:line-clamp-4 min-h-[60px] md:min-h-[96px]">
                         {card.description}
                       </p>
                       <button
                         onClick={handleWhatsAppClick}
-                        className={`inline-flex items-center justify-center gap-2 text-[#4584C5] font-bold text-sm md:text-[16px] transition-all duration-300 group mt-auto ${
-                          hoveredCard === card.id ? "gap-3" : "gap-2"
+                        className={`inline-flex items-center justify-center gap-1 md:gap-2 text-[#4584C5] font-bold text-[10px] md:text-[16px] transition-all duration-300 group mt-auto ${
+                          hoveredCard === card.id ? "gap-2 md:gap-3" : "gap-1 md:gap-2"
                         }`}
                       >
-                        <span>{card.linkText}</span>
+                        <span className="whitespace-nowrap">{card.linkText}</span>
                         <FaArrowRight
-                          className={`inline ${language === "ar" ? "rotate-180" : ""} text-sm md:text-base`}
+                          className={`inline ${language === "ar" ? "rotate-180" : ""} text-[8px] md:text-base`}
                         />
                       </button>
                     </div>
@@ -247,6 +315,8 @@ const SolutionsSection = () => {
               ))}
             </motion.div>
           </div>
+
+      
         </div>
       </div>
     </section>

@@ -34,8 +34,8 @@ export const CountryProvider = ({ children }: { children: ReactNode }) => {
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const browserLang = navigator.language;
         
-        console.log('Detected TimeZone:', timezone);
-        console.log('Detected Language:', browserLang);
+        // console.log('Detected TimeZone:', timezone);
+        // console.log('Detected Language:', browserLang);
         
         // التحقق من وجود مؤشرات لمصر
         if (timezone?.includes('Cairo') || 
@@ -45,7 +45,7 @@ export const CountryProvider = ({ children }: { children: ReactNode }) => {
             browserLang === 'ar-EG') {
           setWhatsappNumber('201024848723');
           setCountryCode('EG');
-          console.log('✅ Egypt detected (TimeZone/Language) - Using number: 201024848723');
+          // console.log('✅ Egypt detected (TimeZone/Language) - Using number: 201024848723');
         } 
         // التحقق من وجود مؤشرات للسعودية
         else if (timezone?.includes('Riyadh') || 
@@ -55,20 +55,20 @@ export const CountryProvider = ({ children }: { children: ReactNode }) => {
                  browserLang === 'ar-SA') {
           setWhatsappNumber('966549256726');
           setCountryCode('SA');
-          console.log('✅ Saudi Arabia detected (TimeZone/Language) - Using number: 966549256726');
+          // console.log('✅ Saudi Arabia detected (TimeZone/Language) - Using number: 966549256726');
         }
         // القيمة الافتراضية إذا لم يتم التعرف على البلد
         else {
           setWhatsappNumber('966549256726');
           setCountryCode('DEFAULT');
-          console.log('⚠️ Country not specifically detected - Using default Saudi number');
+          // console.log('⚠️ Country not specifically detected - Using default Saudi number');
         }
       } catch (error) {
         // الحل النهائي في حال حدوث أي خطأ غير متوقع
         console.error('Error in country detection:', error);
         setWhatsappNumber('966549256726');
         setCountryCode('FALLBACK');
-        console.log('🔄 Fallback - Using default Saudi number');
+        // console.log('🔄 Fallback - Using default Saudi number');
       } finally {
         setIsDetected(true);
       }

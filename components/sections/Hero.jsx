@@ -48,7 +48,7 @@ const Hero = () => {
 
   return (
     <section 
-      id="about" 
+      
       className="relative max-h-[730px] flex items-center overflow-hidden"
     
     >

@@ -25,7 +25,7 @@ export const pushToDataLayer = (event: GTMEvent, data?: EventData) => {
     window.dataLayer.push({
       event,
       ...data,
-      timestamp: new Date().toISOString(),
+      // timestamp: new Date().toISOString(),
     });
     console.log(`GTM Event pushed: ${event}`, data);
   } else {

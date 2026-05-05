@@ -70,7 +70,7 @@ export default function RootLayout({
                   <SubNavbar />
                   <Navbar />
                   <main className="flex-1">{children}</main>
-                  {/* <Footer /> */}
+                  <Footer />
                   <FloatingWhatsApp />
                 </div>
               </LanguageProvider>
