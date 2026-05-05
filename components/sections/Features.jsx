@@ -83,8 +83,8 @@ const Features = () => {
                     <Icon className={`text-xl md:text-3xl w-5 h-5 md:w-8 md:h-8 ${color}`} />
                   </div>
                   {/* تصغير حجم النص للموبايل */}
-                  <h3 className="text-sm md:text-xl whitespace-nowrap font-bold mb-1 md:mb-2 line-clamp-2">{feature.title}</h3>
-                  <p className="text-[#585858] text-xs md:text-[16px] line-clamp-3">
+                  <h3 className="text-sm md:text-xl whitespace-nowrap font-bold mb-1 md:mb-2 ">{feature.title}</h3>
+                  <p className="text-[#585858] text-xs md:text-[16px] line-clamp-none">
                     {feature.description}
                   </p>
                 </Card>

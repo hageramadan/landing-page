@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaPlay, FaChartLine } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCountry } from '@/contexts/CountryContext';
 import Image from 'next/image';
@@ -49,10 +49,8 @@ const Hero = () => {
   return (
     <section 
       id="about" 
-      className="relative flex items-center overflow-hidden"
-      style={{
-        height: '730px',
-      }}
+      className="relative max-h-[730px] flex items-center overflow-hidden"
+    
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -102,7 +100,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-4xl lg:text-[46px] font-bold mb-6 leading-tight text-white"
+                className="text-2xl lg:text-[46px] font-bold mb-6 leading-tight text-white"
               >
                 {t.title}
               </motion.h1>
@@ -112,7 +110,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-base md:text-[20px] text-white/90 mb-8 leading-relaxed"
+                className="text-[12px] md:text-[20px] text-white/90 mb-8 leading-relaxed"
               >
                 {t.description}
               </motion.p>
