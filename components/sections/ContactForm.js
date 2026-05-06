@@ -401,16 +401,18 @@ const ContactForm = ({ countries: countriesProp, onSubmit }) => {
             type="submit"
             whileHover={{ scale: 1.05, boxShadow: "0px 6px 20px #00000060" }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold group text-base"
+            className="flex items-center
+             group bg-gradient-to-r from-[#4584C5] to-[#21405F] hover:from-[#1E75AB] hover:to-[#1E75AB]
+            justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold group text-base"
             style={{
-              background: "linear-gradient(90deg, #4584C5 0%, #21405F 100%)",
+              // background: "linear-gradient(90deg, #4584C5 0%, #21405F 100%)",
               boxShadow: "0px 4px 15px #00000040",
             }}
           >
-            <span>{t("form.submitButton")}</span>
+            <span className="text-sm md:text-[16px] whitespace-nowrap">{t("form.submitButton")}</span>
             <motion.div>
               <FaArrowRight
-                className={`inline ${language === "ar" ? "rotate-180" : ""} text-sm md:text-base`}
+                className={`inline group-hover:-rotate-45 ${language === "ar" ? "rotate-180" : ""} text-sm md:text-base`}
               />
             </motion.div>
           </motion.button>

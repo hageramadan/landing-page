@@ -246,7 +246,7 @@ const PartnersSection = () => {
   }
 
   return (
-    <section id="partners" className="pt-32 overflow-hidden">
+    <div id="partners" className="pt-2 overflow-hidden">
       <div className="container mx-auto px-4" dir={isRTL ? "rtl" : "ltr"}>
         {/* Header Section */}
         <motion.div
@@ -256,9 +256,9 @@ const PartnersSection = () => {
           viewport={{ once: true }}
           className="text-center mx-auto mb-6"
         >
-          <h2 className="text-xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-gray-800">
+          <h1 className="text-xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-[#070D14]">
             {t("partners.title") || "شركاء النجاح حول العالم"}
-          </h2>
+          </h1>
           <p className="text-[#585858] text-xs md:text-lg px-4 mx-auto">
             {t("partners.description") || "نحن شركاء في رحلة التحول الرقمي لنخبة من العلامات التجارية التي اختارت تواجد لتوسيع نطاق أعمالها دولياً."}
           </p>
@@ -309,7 +309,7 @@ const PartnersSection = () => {
                         src={partner.image}
                         alt={partner.name}
                         fill
-                        sizes="150px"
+                        sizes="100px"
                         className="object-contain p-1 md:p-2 group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
@@ -322,7 +322,7 @@ const PartnersSection = () => {
          
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

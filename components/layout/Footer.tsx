@@ -1,15 +1,8 @@
 // Footer.js
 "use client";
 
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-  FaWhatsapp,
-} from "react-icons/fa";
-import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
-import { motion } from "framer-motion";
+
+import { MdEmail } from "react-icons/md";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +11,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useCountry } from "@/contexts/CountryContext";
 
 const Footer = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { whatsappNumber } = useCountry();
 
   const services = [
@@ -83,6 +76,7 @@ const Footer = () => {
               <Image
                 src="/logo2.png"
                 alt="Logo"
+                loading="eager"
                 width={280}
                 height={180}
                 className="w-full h-full object-cover"
@@ -102,7 +96,7 @@ const Footer = () => {
               {services.map((service, index) => (
                 <li key={index}>
                   <Link
-                    aria-label="services"
+                    aria-label={`go to ${service.alt}`}
                     href="#services"
                     className="text-white text-sm md:text-[16px] font-medium"
                   >

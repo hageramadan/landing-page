@@ -12,7 +12,7 @@
   }
   
   section {
-    @apply py-20 px-4 md:px-8;
+    @apply py-10 px-4 md:px-8;
   }
 
   /* RTL Support */
@@ -24,7 +24,52 @@
     direction: ltr;
   }
 }
+/* في ملف globals.css */
+section[id] {
+  scroll-margin-top: 100px; /* نفس ارتفاع الناف بار + شوية مسافة */
+}
 
+/* أو لكل عنصر معين */
+#about, #services, #projects, #partners, #faq, #contact {
+  scroll-margin-top: 100px;
+}
+#privacy{
+  scroll-margin-top: 150px;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* عرض مناسب وتحكم جيد */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f4f8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4584C5;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #21405F;
+  width: 10px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #f0f4f8;
+}
+
+/* دعم Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4584C5 #f0f4f8;
+}
 @layer utilities {
   .font-cairo {
     font-family: var(--font-cairo);

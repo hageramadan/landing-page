@@ -193,7 +193,7 @@ const SolutionsSection = () => {
   }
 
   return (
-    <section id="services" className="bg-white pt-32 overflow-hidden">
+    <section id="services" className="bg-white pt-3 md:pt-5 overflow-hidden">
       <div className="container mx-auto px-4" dir={isRTL ? "rtl" : "ltr"}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -202,9 +202,9 @@ const SolutionsSection = () => {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-8 md:mb-16"
         >
-          <h2 className="text-xl md:text-3xl font-bold mb-3 md:mb-4">
+          <h1 className="text-xl md:text-3xl font-bold mb-3 md:mb-4 text-[#070D14]">
             {t("solutions.title") || "حلول تقنية متكاملة، مصممة لنمو أعمالك"}
-          </h2>
+          </h1>
           <p className="text-[#585858] text-sm md:text-lg px-2">
             {t("solutions.description") || "من الفكرة إلى الإطلاق، نقدم لك باقة شاملة من الخدمات البرمجية والتسويقية التي تضمن استقرار مشروعك وانتشارك في السوق الرقمي."}
           </p>

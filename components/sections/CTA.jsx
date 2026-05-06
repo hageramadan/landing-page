@@ -13,9 +13,9 @@ const CTA = () => {
           viewport={{ once: true }}
           className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center text-white"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl  text-[#070D14] md:text-5xl font-bold mb-4">
             Ready to Get Started?
-          </h2>
+          </h1>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
             Join thousands of satisfied customers and start your journey with us today.
           </p>

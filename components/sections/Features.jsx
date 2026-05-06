@@ -50,7 +50,7 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="bg-white py-12 md:py-16">
+    <section id="about" className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,9 +59,9 @@ const Features = () => {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+          <h1 className="text-xl text-[#070D14] md:text-3xl font-bold mb-3 md:mb-4">
             {t("features.title")}
-          </h2>
+          </h1>
         </motion.div>
 
         <motion.div
@@ -83,7 +83,7 @@ const Features = () => {
                     <Icon className={`text-xl md:text-3xl w-5 h-5 md:w-8 md:h-8 ${color}`} />
                   </div>
                   {/* تصغير حجم النص للموبايل */}
-                  <h3 className="text-sm md:text-xl whitespace-nowrap font-bold mb-1 md:mb-2 ">{feature.title}</h3>
+                  <h2 className="text-sm md:text-xl whitespace-nowrap font-bold mb-1 md:mb-2 ">{feature.title}</h2>
                   <p className="text-[#585858] text-xs md:text-[16px] line-clamp-none">
                     {feature.description}
                   </p>
@@ -105,11 +105,7 @@ const Features = () => {
             onClick={handleWhatsAppClick}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0px 6px 20px #00000060",
-              transition: { duration: 0.2 }
-            }}
+            
             whileTap={{ scale: 0.95 }}
             transition={{ 
               type: "spring",
@@ -117,9 +113,11 @@ const Features = () => {
               damping: 10,
               delay: 0
             }}
-            className="flex items-center justify-center gap-2 px-4 py-2 md:px-8 md:py-3 rounded-lg text-white font-semibold mx-auto group text-sm md:text-base"
+            className="flex items-center group bg-gradient-to-r from-[#4584C5] to-[#21405F] hover:from-[#1E75AB]
+             hover:to-[#1E75AB] justify-center gap-2 px-4 py-2 md:px-8 md:py-3 rounded-lg text-white
+              font-semibold mx-auto group text-sm md:text-base"
             style={{
-              background: "linear-gradient(90deg, #4584C5 0%, #21405F 100%)",
+              // background: "linear-gradient(90deg, #4584C5 0%, #21405F 100%)",
               boxShadow: "0px 4px 15px #00000040",
               minWidth: "220px",
             }}
@@ -128,7 +126,7 @@ const Features = () => {
               {t("features.consultation.button") || "احصل على استشارة مجانية"}
             </span>
             <motion.div>
-              <FaArrowRight className={`inline ${language === 'ar' ? 'rotate-180' : ''} text-sm md:text-base`} />
+              <FaArrowRight className={`inline group-hover:-rotate-45 ${language === 'ar' ? 'rotate-180' : ''} text-sm md:text-base`} />
             </motion.div>
           </motion.button>
         </motion.div>

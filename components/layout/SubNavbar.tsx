@@ -23,14 +23,15 @@ const SubNavbar = () => {
         <div className="flex items-center justify-between h-full">
           {/* Left Side - Contact Info */}
           <div className="flex items-center gap-6">
-            <a
+            <Link
+            aria-label="go to email"
               href="mailto:info@tawajood.com"
-              className="flex items-center gap-2 text-white hover:text-blue-200 transition-colors"
+              className="flex items-center cursor-pointer gap-2 text-white hover:text-blue-200 transition-colors"
               dir="ltr"
             >
               <span className="text-[16px] ">info@tawajood.com</span>
               <MdOutlineEmail className="text-sm md:w-6 md:h-6" />
-            </a>
+            </Link>
           </div>
 
           {/* Right Side - Language Dropdown */}
@@ -40,24 +41,25 @@ const SubNavbar = () => {
               <p className='text-[#FEFEFE] text-[14px] whitespace-nowrap'>
                 {language === 'ar' ? 'تواصل معنا :' : 'Contact us :'}
               </p>
-              <Link href="https://www.facebook.com/tawajood?mibextid=LQQJ4d" target="_blank" className="text-white hover:text-blue-200 transition-colors">
+              <Link aria-label="go to facebook" href="https://www.facebook.com/tawajood?mibextid=LQQJ4d" target="_blank" className="text-white hover:text-blue-200 transition-colors">
                 <FaFacebook className="text-white hover:text-blue-200 w-4 h-4"/>
               </Link>
-              <Link href="https://www.linkedin.com/company/tawajood/posts/?feedView=all" target="_blank" className="text-white hover:text-blue-200 transition-colors">
+              <Link aria-label="go to linkedin" href="https://www.linkedin.com/company/tawajood/posts/?feedView=all" target="_blank" className="text-white hover:text-blue-200 transition-colors">
                 <FaLinkedinIn className="text-white hover:text-blue-200 w-4 h-4"/>
               </Link>
-              <Link href="https://www.instagram.com/tawajoodco?igsh=MWxna2xqazBvZzQyaw%3D%3D" target="_blank" className="text-white hover:text-blue-200 transition-colors">
+              <Link aria-label="go to instagram" href="https://www.instagram.com/tawajoodco?igsh=MWxna2xqazBvZzQyaw%3D%3D" target="_blank" className="text-white hover:text-blue-200 transition-colors">
                 <FaInstagram className="text-white hover:text-blue-200 w-4 h-4"/>
               </Link>
               {/* WhatsApp Link with Dynamic Number */}
               <Link 
                 href={`https://wa.me/${whatsappNumber}`} 
                 target="_blank" 
+                aria-label="go to whatsapp"
                 className="text-white hover:text-green-400 transition-colors"
               >
                 <IoLogoWhatsapp className="text-white hover:text-blue-200 w-4 h-4"/>
               </Link>
-              <Link href="https://www.tiktok.com/@tawajood?_t=8n26pzQEDlV&_r=1" target="_blank" className="text-white hover:text-blue-200 transition-colors">
+              <Link aria-label="go to tiktok" href="https://www.tiktok.com/@tawajood?_t=8n26pzQEDlV&_r=1" target="_blank" className="text-white hover:text-blue-200 transition-colors">
                 <FaTiktok className="text-white hover:text-blue-200 w-4 h-4"/>
               </Link>
             </div>

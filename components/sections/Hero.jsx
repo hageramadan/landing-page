@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCountry } from '@/contexts/CountryContext';
+import { GoArrowUpLeft } from "react-icons/go";
 import Image from 'next/image';
 
 const Hero = () => {
@@ -124,22 +125,19 @@ const Hero = () => {
               >
                 <button 
                   onClick={handleWhatsAppClick}
-                  className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold transition-all hover:scale-105"
+                  className="flex group items-center bg-gradient-to-r from-[#4584C5] to-[#21405F] hover:from-[#1E75AB] hover:to-[#1E75AB] justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold transition-all hover:scale-105"
                   style={{
-                    background: 'linear-gradient(90deg, #4584C5 0%, #21405F 100%)',
+                    // background: 'linear-gradient(90deg, #4584C5 0%, #21405F 100%)',
                     boxShadow: '0px 4px 15px #00000040',
                     minWidth: '200px'
                   }}
                 >
                   {t.cta}
-                  <FaArrowRight className={`inline ${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'}`} />
+                  <FaArrowRight className={`inline group-hover:-rotate-45 ${language === 'ar' ? 'mr-2 rotate-180' : 'ml-2'}`} />
+                 
                 </button>
                 
-                {/* يمكنك إضافة زر "شاهد أعمالنا" هنا إذا أردت */}
-                {/* <button className="flex items-center justify-center gap-2 px-8 py-3 rounded-lg text-white font-semibold transition-all hover:scale-105 border border-white/30 hover:bg-white/10">
-                  {t.demo}
-                  <FaPlay className="inline ml-2" />
-                </button> */}
+               
                 
               </motion.div>
             </div>

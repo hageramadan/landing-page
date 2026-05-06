@@ -18,7 +18,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section id="faq" className="pt-32 overflow-hidden bg-[#EDF3F9]">
+    <section id="faq" className="pt-3 md:pt-5 overflow-hidden bg-[#EDF3F9]">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex md:items-start items-center gap-8 lg:gap-12 justify-between">
           
@@ -32,9 +32,9 @@ const FAQSection = () => {
           >
             {/* العنوان العلوي للسكشن */}
             <div className="mb-8 text-center lg:text-start">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#070D14] mb-2">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#070D14] mb-2">
                 {t("faq.title")}
-              </h2>
+              </h1>
             </div>
 
             {/* قائمة الأسئلة */}
@@ -117,6 +117,13 @@ const FAQSection = () => {
           {/* الصورة في الشمال */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
+              whileHover={{ 
+      y: [-2, -10],  // فقط تطلع لفوق وتنزل مكانها مرة واحدة
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}

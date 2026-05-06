@@ -36,14 +36,14 @@ const ContactInfo = ({ social, phoneNumbers, emails, addresses }) => {
       {/* المحتوى */}
       <div className="relative z-10 p-6 md:p-8 lg:p-10 text-white h-full flex flex-col justify-between">
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-2">
+          <h1 className="text-xl md:text-3xl font-bold mb-3 md:mb-6 flex items-center gap-2">
             {t("contactInfo.title")}
-          </h3>
+          </h1>
           <p className="text-[16px] text-[#C9C9C9] mb-1">
             {t("contactInfo.subtitle")}
           </p>
           <div className="space-y-6">
-            <div className="p-4"></div>
+            <div className="md:p-4"></div>
 
             {/* أرقام الهاتف */}
             {phoneNumbers.map((phone, index) => (
@@ -82,6 +82,7 @@ const ContactInfo = ({ social, phoneNumbers, emails, addresses }) => {
               <Link
                 key={item.id}
                 href={item.link}
+                aria-label={`go to ${item}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group transition-all duration-300 hover:-translate-y-2"

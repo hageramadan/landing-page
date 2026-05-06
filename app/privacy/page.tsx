@@ -4,20 +4,13 @@
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { MdEmail, MdPhone, MdDateRange } from "react-icons/md";
 import { FaShieldAlt, FaDatabase, FaUserSecret, FaShareAlt, FaCookie, FaSyncAlt } from "react-icons/fa";
-import Link from "next/link";
+
 
 export default function PrivacyPolicyPage() {
   const { language, t } = useLanguage();
   const isRTL = language === "ar";
   
-  // Current date for last update
-  const currentDate = new Date().toLocaleDateString(language === "ar" ? "ar-SA" : "en-US", {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
 
   // Icons for each section
   const sectionIcons = [
@@ -33,7 +26,8 @@ export default function PrivacyPolicyPage() {
   const sections = privacyData.sections || [];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-white  py-6">
+    <main id="privacy" className="min-h-screen bg-gradient-to-br from-gray-50 to-white  py-6"
+    >
       <div className="container mx-auto px-4 md:px-8">
         
         {/* Hero Section */}
@@ -78,9 +72,9 @@ export default function PrivacyPolicyPage() {
                   {sectionIcons[index % sectionIcons.length]}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#070D14] mb-3">
+                  <h2 className="text-xl font-bold text-[#070D14] mb-3">
                     {section.title}
-                  </h3>
+                  </h2>
                   <p className="text-gray-600 leading-relaxed text-sm md:text-base">
                     {section.content}
                   </p>

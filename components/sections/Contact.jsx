@@ -98,13 +98,13 @@ const countries = [
   };
 
   return (
-    <section id="contact" className="pt-32 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
+    <section id="contact" className="pt-3 md:pt-5 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center flex flex-col gap-3">
-          <h1 className="text-[#070D14] text-[48px] font-extrabold">
+        <div className="text-center flex flex-col gap-3 mb-3">
+          <h1 className=" text-xl md:text-3xl font-bold mb-2 md:mb-4 text-[#070D14]">
             {t("contactSection.title")}
           </h1>
-          <p className="text-[#595689] text-[18px] mb-4 md:mb-8">
+          <p className="text-[#595689] text-[16px] md:text-[18px] mb-4 ">
             {t("contactSection.description")}
           </p>
         </div>

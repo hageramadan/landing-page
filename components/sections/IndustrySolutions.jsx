@@ -145,7 +145,7 @@ const IndustrySolutions = () => {
   };
 
   return (
-    <section id="projects" className="bg-white pt-32 overflow-hidden">
+    <section id="projects" className="bg-white pt-3 md:pt-5 overflow-hidden">
       <div className="container mx-auto px-4" dir={isRTL ? "rtl" : "ltr"}>
         {/* العنوان والوصف */}
         <motion.div
@@ -155,9 +155,9 @@ const IndustrySolutions = () => {
           viewport={{ once: true }}
           className="text-center mx-auto mb-12 md:mb-16"
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="text-xl text-[#070D14] md:text-3xl font-bold mb-3 md:mb-4">
             {t("industrySolutions.title") || "حلول برمجية تناسب مختلف الصناعات"}
-          </h2>
+          </h1>
           <p className="text-[#585858] text-sm md:text-lg">
             {t("industrySolutions.description") || "استكشف سابقة أعمالنا في صناعات مثل العقارات، المطاعم، عيادات التجميل، المتاجر الالكترونية، والمزيد."}
           </p>
@@ -229,9 +229,9 @@ const IndustrySolutions = () => {
                     animate="animate"
                     exit="exit"
                   >
-                    <h3 className="text-[7px] md:text-[14px] w-fit px-2 md:px-4 py-1 md:py-2 rounded font-semibold mb-1 md:mb-2 bg-[#79C5F2] text-white truncate">
+                    <h2 className="text-[7px] md:text-[14px] w-fit px-2 md:px-4 py-1 md:py-2 rounded font-semibold mb-1 md:mb-2 bg-[#79C5F2] text-white truncate">
                       {slides[currentIndex].title}
-                    </h3>
+                    </h2>
                     <p className="font-bold text-[#191C1F] text-[12px] md:text-[20px] my-1 md:my-4">
                       {slides[currentIndex].subtitle}
                     </p>
@@ -277,13 +277,17 @@ const IndustrySolutions = () => {
 
                         <button
                           onClick={handleWhatsAppClick}
-                          className="bg-gradient-to-r mt-3 w-fit from-[#4584C5] to-[#21405F] text-white px-2 md:px-5 py-1 md:py-2.5 rounded-lg font-semibold text-[8px] md:text-sm hover:shadow-lg transition-all duration-300 flex items-center gap-1 md:gap-2 group"
+                          className=" mt-3 w-fit 
+                           group bg-gradient-to-r from-[#4584C5] to-[#21405F] hover:from-[#1E75AB] hover:to-[#1E75AB]
+                            text-white px-2 md:px-5 py-1 md:py-2.5 
+                            rounded-lg font-semibold text-[8px]
+                             md:text-[16px] hover:shadow-lg transition-all duration-300 flex items-center gap-1 md:gap-2 group"
                         >
                           <span className="whitespace-nowrap">
                             {slides[currentIndex].buttonText}
                           </span>
                           <FaArrowRight
-                            className={`text-[8px] md:text-sm ${language === "ar" ? "rotate-180" : ""} group-hover:translate-x-1 transition-transform`}
+                            className={`text-[8px] md:text-sm ${language === "ar" ? "rotate-180" : ""} group-hover:-rotate-45 transition-transform`}
                           />
                         </button>
                       </div>
