@@ -62,7 +62,7 @@ const Footer = () => {
     },
   ];
 
-  const phoneNumbers = ["+966549256726", "01024848723"];
+  const phoneNumbers = ["966549256726+", "201024848723+"];
   const emails = ["info@tawajood.com"];
  const addresses = t("addressesList");
 
@@ -138,7 +138,7 @@ const Footer = () => {
                 {phoneNumbers.map((phone, index) => (
                   <div key={index} className="flex items-center gap-3 md:gap-4">
                     <BiSolidPhoneCall className="w-5 h-5 md:w-6 md:h-6 text-[#ffffff]" />
-                    <p className="text-lg font-semibold">{phone}</p>
+                    <p className="text-lg font-semibold" dir="rtl">{phone}</p>
                   </div>
                 ))}
 

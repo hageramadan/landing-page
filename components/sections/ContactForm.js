@@ -396,7 +396,7 @@ const ContactForm = ({ countries: countriesProp, onSubmit }) => {
         </div>
 
         {/* زر الإرسال */}
-        <div className="flex justify-end pt-4">
+        <div className="flex justify-center md:justify-end pt-4">
           <motion.button
             type="submit"
             whileHover={{ scale: 1.05, boxShadow: "0px 6px 20px #00000060" }}
