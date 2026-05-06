@@ -50,7 +50,7 @@ const ContactSection = () => {
     },
   ];
 
-  const phoneNumbers = ["+966549256726", "01024848723"];
+  const phoneNumbers = ["966549256726+", "201024848723+"];
   const emails = ["info@tawajood.com"];
  const addresses = t("addressesList");
 
